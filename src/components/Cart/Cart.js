@@ -2,12 +2,12 @@ import React from 'react';
 
 const Cart = (props) => {
     const cart = props.cart;
-    // const total = cart.reduce((total, prd) => total + prd.price,0);
-    let total = 0;
-    for(let i=0; i < cart.length; i++){
-        const product = cart[i];
-        total = total + product.price * product.quantity;
-    }
+    const total = cart.reduce((sum, product) => sum + product.price,0);
+    // let total = 0;
+    // for(let i=0; i < cart.length; i++){
+    //     const product = cart[i];
+    //     total = total + product.price * product.quantity;
+    // }
 
     let shipping = 0;
     if(total>100){
@@ -23,8 +23,8 @@ const Cart = (props) => {
         shipping = 20.99;
     }
 
-    const tax = (total /10);
-    const grandTotal = total + shipping + parseFloat(tax);
+    const tax = (total /10).toFixed(2);
+    const grandTotal = (total + shipping + parseFloat(tax)).toFixed(2);
 
     const formatNumber = num => {
         const precision = num.toFixed(2);
